@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assingment 5</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 48px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #4caf50;
+            margin: 40px 0;
+        }
+
+        h1:before,
+        h1:after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 3px;
+            background-color: #4caf50;
+            margin: 20px auto;
+        }
+
+
+
+        #task-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #task-name {
+            flex-grow: 1;
+            font-size: 16px;
+            padding: 12px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+
+        #add-task {
+            font-size: 16px;
+            padding: 12px;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
+
+        #task-list {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 0;
+            list-style: none;
+        }
+
+        #task-list li {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #task-list li.completed {
+            background-color: #f2f2f2;
+            color: #aaa;
+        }
+
+        #task-list li:hover {
+            background-color: #eee;
+        }
+
+        #task-list li .delete {
+            margin-left: auto;
+            font-size: 18px;
+            color: #ddd;
+            cursor: pointer;
+        }
+
+        #task-list li .delete:hover {
+            color: #f44336;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Task Manager</h1>
+    <form id="task-form">
+        <input type="text" id="task-name" placeholder="Enter task name">
+        <button type="submit" id="add-task">Add Task</button>
+    </form>
+    <ul id="task-list"></ul>
+    <script>
+        const taskForm = document.getElementById('task-form');
+        const taskInput = document.getElementById('task-name');
+        const taskList = document.getElementById('task-list');
+
+        taskForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const taskName = taskInput.value;
+            if (taskName === '') return;
+
+            const taskItem = document.createElement('li');
+            taskItem.innerHTML = taskName;
+            taskList.appendChild(taskItem);
+
+            taskInput.value = '';
+
+            taskItem.addEventListener('click', () => {
+                taskItem.classList.toggle('completed');
+            });
+
+            taskItem.addEventListener('dblclick', () => {
+                taskList.removeChild(taskItem);
+            });
+        });
+
+    </script>
+</body>
+
+</html>
